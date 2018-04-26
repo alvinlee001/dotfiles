@@ -1,9 +1,9 @@
 [user]
-  name = GITHUBFULLNAME
-  email = GITHUBEMAIL
+  name = Alvin Lee
+  email = alvinlee001@live.com.my
 [github]
   # https://github.com/blog/180-local-github-config
-  user = GITHUBUSER
+  user = alvinlee001
 [color]
 # ui = true is a superset of all the more specific color options
 #  as documented at http://book.git-scm.com/5_customizing_git.html
@@ -52,6 +52,7 @@
 
 [alias]
   # most commonly used
+  gui = !sh -c '/usr/local/Cellar/git/2.16.2/libexec/git-core/git-gui'
   co = checkout
   d = diff --color-words
   cam = commit -a -m
