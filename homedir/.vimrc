@@ -1,8 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme Tomorrow-Night
+colorscheme happy_hacking
+"colorscheme lucario
 " syntax on " syntax highlighting on
+set termguicolors
 syntax enable
 let g:solarized_termtrans = 1
 call togglebg#map("<F5>")
@@ -23,6 +25,7 @@ call plug#begin('~/.vim/plugged')
 " Keep Plugin commands between vundle#begin/end.
 " let Vundle manage Vundle
 Plug 'VundleVim/Vundle.vim'
+" === Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer --js-completer --java-completer --tern-completer' }
 " Navigation (IDE frame)
 Plug 'scrooloose/nerdtree'
@@ -42,6 +45,7 @@ Plug 'sjl/gundo.vim'
 " markdown preview: opens browser with live reload when vim opens .md
 Plug 'suan/vim-instant-markdown'
 Plug 'godlygeek/tabular'
+
 " language tools
 Plug 'scrooloose/syntastic'
 Plug 'millermedeiros/vim-esformatter'
@@ -72,7 +76,11 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'chriskempson/tomorrow-theme'
 Plug 'junegunn/limelight.vim'
 Plug 'dart-lang/dart-vim-plugin'
+
+" === moving / searching
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+
 Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -85,6 +93,13 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }"
 Plug 'honza/vim-snippets'
+Plug 'Galooshi/import-js'
+Plug 'galooshi/vim-import-js'
+Plug 'https://github.com/miconda/lucariox.vim.git'
+Plug 'aradunovic/perun.vim'
+
+" === colors
+
 "
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -319,6 +334,23 @@ let g:syntastic_enable_tslint_checker = 1
 let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_enable_pug_checker = 1
 let g:syntastic_pug_checkers = ['jade','pug']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim-Javascript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+
+set conceallevel=1
+map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prettier
