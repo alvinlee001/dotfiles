@@ -48,7 +48,7 @@ plugins=(
   zsh-syntax-highlighting
   colored-man-pages 
   composer
-
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -145,6 +145,33 @@ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 # Others
+
+
+# git
+  function git_prepare() {
+    if [ -n "$BUFFER" ];
+      then
+        BUFFER="git add -A; git commit -m \"$BUFFER\" && git push"
+      fi
+
+    if [ -z "$BUFFER" ];
+      then
+        BUFFER="git add -A; git commit -v && git push"
+    fi
+
+    zle accept-line
+  }
+  zle -N git_prepare
+  bindkey "^g" git_prepare
+
+
+# up
+  function up_widget() {
+    BUFFER="cd .."
+    zle accept-line
+  }
+  zle -N up_widget
+  bindkey "^k" up_widget
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
