@@ -1,13 +1,14 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 # if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
-POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_MODE='awesome-fontconfig'
 export ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_STRATEGY=”truncate_from_right”
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir nvm vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vi_mode dir nvm vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time battery)
 POWERLEVEL9K_CUSTOM_ALVIN="echo -e '😎 '"
 POWERLEVEL9K_DIR_FOREGROUND='red'
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="white"
@@ -38,15 +39,15 @@ export DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-  colorize 
-  compleat 
-  dirpersist 
-  autojump 
-  git gulp 
-  history 
-  cp 
+  colorize
+  compleat
+  dirpersist
+  autojump
+  git gulp
+  history
+  cp
   zsh-syntax-highlighting
-  colored-man-pages 
+  colored-man-pages
   composer
   vi-mode
 )
@@ -100,7 +101,7 @@ export PATH=${PATH}:${JBOSS_HOME}/bin
 
 # PHP and COMPOSER VARIABLES
 export PATH=~/.composer/vendor/bin:$PATH
-export PATH=/usr/local/Cellar/php71/7.1.8_20/bin:$PATH
+export PATH=/usr/local/opt/php@7.1/bin:$PATH
 
 # FLUTTER
 export PATH=$HOME/flutter/bin:$PATH
@@ -138,6 +139,10 @@ alias vibash='vi ~/.bash_profile'
 alias sb='source ~/.bash_profile'
 alias ls='ls -la'
 alias logstash-filebeat='logstash -f /Users/alvinlee/logstash/logstash.filebeat.conf'
+alias ctags="`brew --prefix`/bin/ctags"
+
+# font sourcing
+source ~/.fonts/*.sh
 
 # Change Command Prompt
 function parse_git_branch {

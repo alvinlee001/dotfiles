@@ -1,6 +1,6 @@
 [user]
-  name = Alvin Lee
-  email = alvinlee001@live.com.my
+	name = Alvin Lee
+	email = alvinlee001@live.com.my
 [github]
   # https://github.com/blog/180-local-github-config
   user = alvinlee001
@@ -196,6 +196,7 @@
   smudge = git media smudge %f
 
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
   required = true
+	process = git-lfs filter-process
