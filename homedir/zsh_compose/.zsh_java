@@ -1,0 +1,10 @@
+#Spring
+
+gboot() {
+  if [ -z "$1" ]
+  then
+    gradle bootRun
+  else
+    gradle :"$1":bootRun
+  fi
+}

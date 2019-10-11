@@ -37,7 +37,7 @@
   fontdiff = -family Monaco -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/alvinlee/.gitignore
   quotepath = false
   # line endings
   # force LF during add
@@ -138,6 +138,7 @@
   configpushnothing = config push.default nothing
   configpushmatching = config push.default matching
   configpushcurrent = config push.default current
+  p = "!git pull --rebase && git push"
 
   nr = "!sh -c 'git init $0'"
   echoparam1 = "!sh -c 'echo $0'"
@@ -200,3 +201,11 @@
 	smudge = git-lfs smudge -- %f
   required = true
 	process = git-lfs filter-process
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /private/var/folders/zm/x004rl3951b9vqwyf0bflps40000gn/T/AppTranslocation/4E7F2285-429E-4F50-8ACB-63FDADD390EE/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[credential "https://source.developers.google.com"]
+	helper = gcloud.sh

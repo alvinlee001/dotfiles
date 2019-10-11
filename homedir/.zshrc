@@ -2,12 +2,13 @@
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 # if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
 POWERLEVEL9K_MODE='awesome-fontconfig'
-export ZSH_THEME="powerlevel9k/powerlevel9k"
+# export ZSH_THEME="spaceship"
+export ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY=”truncate_from_right”
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
 # https://github.com/bhilburn/powerlevel9k/wiki/Stylizing-Your-Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vi_mode dir nvm vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vi_mode dir nvm java_version vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time battery)
 POWERLEVEL9K_CUSTOM_ALVIN="echo -e '😎 '"
 POWERLEVEL9K_DIR_FOREGROUND='red'
@@ -78,6 +79,9 @@ fortune
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
+# nvbn/thefuck (Auto-correct last command mistake)
+eval $(thefuck --alias)
+
 
 # Copied from .bash_profile
 # OVERRIDE ALL VARIABLES, EXPECIALLY FOR LIBTOOL
@@ -92,8 +96,8 @@ export PATH=$ANDROID_HOME/tools:$PATH
 # export PATH=/Applications/MAMP/Library/bin:$PATH
 
 # TOMEE VARIABLES
-export CATALINA_HOME=/usr/local/opt/tomee-plus/libexec
-export PATH=/usr/local/opt/tomee-plus/libexec/bin:$PATH
+# export CATALINA_HOME=/usr/local/opt/tomee-plus/libexec
+# export PATH=/usr/local/opt/tomee-plus/libexec/bin:$PATH
 
 # JBOSS VARIABLES
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
@@ -140,6 +144,8 @@ alias sb='source ~/.bash_profile'
 alias ls='ls -la'
 alias logstash-filebeat='logstash -f /Users/alvinlee/logstash/logstash.filebeat.conf'
 alias ctags="`brew --prefix`/bin/ctags"
+alias py3='python3'
+alias pi='pip3 install --user'
 
 # font sourcing
 source ~/.fonts/*.sh
@@ -169,6 +175,25 @@ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
   zle -N git_prepare
   bindkey "^g" git_prepare
 
+# tmux
+  function tmux_prepare() {
+    if [ -n "$BUFFER" ];
+      then
+        BUFFER="tmux new-session -s \"$BUFFER\" && tmux a -t \"$BUFFER\""
+      fi
+
+    if [ -z "$BUFFER" ];
+      then
+        BUFFER="tmux new-session -s ${PWD##*/} -n editor -d \
+                && tmux send-keys -t ${PWD##*/} 'nvim .' C-m \
+                && tmux split-window -v -p 1 -t  ${PWD##*/} \
+                && tmux a -t ${PWD##*/}"
+    fi
+
+    zle accept-line
+  }
+  zle -N tmux_prepare
+  bindkey "^n" tmux_prepare
 
 # up
   function up_widget() {
@@ -190,3 +215,29 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/alvinlee/.sdkman"
+[[ -s "/Users/alvinlee/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alvinlee/.sdkman/bin/sdkman-init.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/AlvinLee/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/AlvinLee/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/AlvinLee/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/AlvinLee/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+#unalias some conflicted commands
+unalias grv
+
+# using faster powerlevel9k config, for a change of taste, overrrides existing powerlevel9k configs in this current file.
+# comment out to use custom powerlevel9K config
+# source ~/.purepower
+
+
+#### SOME ADDITIONAL STUFF
+#
+
+source ./zsh_compose/.zsh_java
+
+export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
+#### END ADDITIONAL STUFF
