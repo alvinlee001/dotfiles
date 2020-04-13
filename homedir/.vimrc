@@ -1,8 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Must Have
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme solarized
+colorscheme happy_hacking
+"colorscheme lucario
 " syntax on " syntax highlighting on
+set termguicolors
 syntax enable
 let g:solarized_termtrans = 1
 call togglebg#map("<F5>")
@@ -13,47 +15,47 @@ else
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" Plug
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " Keep Plugin commands between vundle#begin/end.
 " let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
-" Plugin 'Valloric/YouCompleteMe'
+Plug 'VundleVim/Vundle.vim'
+" === Completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer --js-completer --java-completer --tern-completer' }
 " Navigation (IDE frame)
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'justinmk/vim-sneak'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-surround'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'editorconfig/editorconfig-vim'
+"
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'justinmk/vim-sneak'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'dkprice/vim-easygrep'
+Plug 'editorconfig/editorconfig-vim'
 " visual undo list
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 " Plugin 'majutsushi/tagbar'
 " markdown preview: opens browser with live reload when vim opens .md
-Plugin 'suan/vim-instant-markdown'
-Plugin 'godlygeek/tabular'
+Plug 'suan/vim-instant-markdown'
+Plug 'godlygeek/tabular'
+
 " language tools
-Plugin 'scrooloose/syntastic'
-Plugin 'millermedeiros/vim-esformatter'
-Plugin 'digitaltoad/vim-pug'
+Plug 'scrooloose/syntastic'
+Plug 'millermedeiros/vim-esformatter'
+Plug 'digitaltoad/vim-pug'
 " Plugin 'elzr/vim-json'
-" Plugin 'SirVer/ultisnips'
 "Plugin 'sheerun/vim-polyglot'
 " plugins from http://vim-scripts.org/vim/scripts.html
-Plugin 'node.js'
-Plugin 'SuperTab'
+" Plug 'node.js'
+" Plug 'SuperTab'
 " Git plugin not hosted on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
@@ -65,13 +67,44 @@ Plugin 'SuperTab'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 " TypeScript
-" Plugin 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 " Vue.js
-Plugin 'posva/vim-vue'
+Plug 'posva/vim-vue'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'YorickPeterse/happy_hacking.vim'
+Plug 'whatyouhide/vim-gotham'
+Plug 'chriskempson/tomorrow-theme'
+Plug 'junegunn/limelight.vim'
+Plug 'dart-lang/dart-vim-plugin'
 
+" === moving / searching
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'alvan/vim-closetag'
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'mattn/emmet-vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }"
+Plug 'honza/vim-snippets'
+Plug 'Galooshi/import-js'
+Plug 'galooshi/vim-import-js'
+Plug 'https://github.com/miconda/lucariox.vim.git'
+Plug 'aradunovic/perun.vim'
+
+" === colors
+
+"
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()            " required
+" filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -110,6 +143,7 @@ if has("clipboard")
   endif
 endif
 
+set sidescroll=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups/Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,9 +197,9 @@ set laststatus=2 " always show the status line
 set ai " autoindent (filetype indenting instead)
 set nosi " smartindent (filetype indenting instead)
 set cindent " do c-style indenting
-set softtabstop=4 " unify
-set shiftwidth=4 " unify
-set tabstop=4 " real tabs should be 4, but they will show with set list on
+set softtabstop=2 " unify
+set shiftwidth=2 " unify
+set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
 " wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
 set textwidth=120
@@ -289,6 +323,7 @@ vnoremap <silent> <leader>es :EsformatterVisual<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+<<<<<<< HEAD
 "let NERDTreeShowHidden=1
 "let NERDTreeIgnore=['\.DS_Store$']
 "" auto open if no file sent as arg
@@ -334,8 +369,63 @@ let g:syntastic_enable_tslint_checker = 1
 "let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_enable_pug_checker = 1
 let g:syntastic_pug_checkers = ['jade','pug']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim-Javascript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+
+set conceallevel=1
+map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Prettier
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 0
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+let g:prettier#config#bracket_spacing = 'true'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.dotfiles/homedir/.vim/plugged/vim-snippets/UltiSnips']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\\"
 let g:sneak#streak = 1
 let g:airline_theme='bubblegum'
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js"
+" Trigger configuration (Optional)
+let g:UltiSnipsExpandTrigger="<C-l>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"alvin's shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <c-c> <esc>viw<esc>a"<esc>bi"<esc>leli
+inoremap <c-a> <esc>viw<esc>a'<esc>bi'<esc>leli
+inoremap <c-d> <esc>ddi

@@ -4,6 +4,7 @@ export ZSH=$HOME/.dotfiles/oh-my-zsh
 POWERLEVEL9K_MODE='awesome-fontconfig'
 # export ZSH_THEME="spaceship"
 export ZSH_THEME="powerlevel9k/powerlevel9k"
+# POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY=”truncate_from_right”
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
@@ -141,6 +142,129 @@ alias ion-kill='kill -9 $(lsof -ti :8001-8079)'
 alias cdhtdocs='cd /Applications/MAMP/htdocs'
 alias vibash='vi ~/.bash_profile'
 alias sb='source ~/.bash_profile'
+alias ls='ls -la'
+alias logstash-filebeat='logstash -f /Users/alvinlee/logstash/logstash.filebeat.conf'
+alias ctags="`brew --prefix`/bin/ctags"
+alias py3='python3'
+alias pi='pip3 install --user'
+
+# font sourcing
+source ~/.fonts/*.sh
+
+# Change Command Prompt
+function parse_git_branch {
+git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# Others
+
+
+# git
+  function git_prepare() {
+    if [ -n "$BUFFER" ];
+      then
+        BUFFER="git add -A; git commit -m \"$BUFFER\" && git push"
+      fi
+
+    if [ -z "$BUFFER" ];
+      then
+        BUFFER="git add -A; git commit -v && git push"
+    fi
+
+    zle accept-line
+  }
+  zle -N git_prepare
+  bindkey "^g" git_prepare
+
+# tmux
+  function tmux_prepare() {
+    if [ -n "$BUFFER" ];
+      then
+        BUFFER="tmux new-session -s \"$BUFFER\" && tmux a -t \"$BUFFER\""
+      fi
+
+    if [ -z "$BUFFER" ];
+      then
+        BUFFER="tmux new-session -s ${PWD##*/} -n editor -d \
+                && tmux send-keys -t ${PWD##*/} 'nvim .' C-m \
+                && tmux split-window -v -p 1 -t  ${PWD##*/} \
+                && tmux a -t ${PWD##*/}"
+    fi
+
+    zle accept-line
+  }
+  zle -N tmux_prepare
+  bindkey "^n" tmux_prepare
+
+# up
+  function up_widget() {
+    BUFFER="cd .."
+    zle accept-line
+  }
+  zle -N up_widget
+  bindkey "^k" up_widget
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# added by Anaconda3 5.0.1 installer
+# export PATH="/Users/AlvinLee/anaconda3/bin:$PATH"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/alvinlee/.sdkman"
+[[ -s "/Users/alvinlee/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alvinlee/.sdkman/bin/sdkman-init.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/AlvinLee/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/AlvinLee/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/AlvinLee/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/AlvinLee/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+#unalias some conflicted commands
+unalias grv
+
+# using faster powerlevel9k config, for a change of taste, overrrides existing powerlevel9k configs in this current file.
+# comment out to use custom powerlevel9K config
+# source ~/.purepower
+
+
+#### SOME ADDITIONAL STUFF
+#
+
+source ./zsh_compose/.zsh_java
+
+# export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
+#### END ADDITIONAL STUFF
+
+export PATH=~/.composer/vendor/bin:$PATH
+export PATH=/usr/local/opt/php@7.1/bin:$PATH
+
+# FLUTTER
+export PATH=$HOME/flutter/bin:$PATH
+
+# VISUAL STUDIO CODE
+export PATH=/usr/local/bin/code:$PATH
+
+# ANSIBLE
+export ANSIBLE_HOSTS=/etc/ansible/hosts
+
+# NODE VERSION MANAGER
+# export NVM_DIR=~/.nvm
+# source $(brew --prefix nvm)/nvm.sh
+
+# RUBY
+export RBENV_ROOT=/usr/local/var/rbenv
+eval "$(rbenv init -)"
+
+# GOLANG
+export GOPATH=~/Go_Workspace
+export PATH=/usr/local/go/bin:$PATH
+
+# Some aliases
 alias ls='ls -la'
 alias logstash-filebeat='logstash -f /Users/alvinlee/logstash/logstash.filebeat.conf'
 alias ctags="`brew --prefix`/bin/ctags"
