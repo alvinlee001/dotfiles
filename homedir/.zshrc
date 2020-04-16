@@ -364,4 +364,7 @@ unalias grv
 source ./zsh_compose/.zsh_java
 
 # export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
+export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
+export PYTHONPATH="/Users/alvinlee/Library/Python/3.7/bin"
 #### END ADDITIONAL STUFF
+export PATH="/usr/local/bin:$PATH"
