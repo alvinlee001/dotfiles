@@ -149,10 +149,6 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias py3='python3'
 alias pi='pip3 install --user'
 
-# font sourcing
-source ~/.fonts/*.sh
-# source ~/.fonts/*.sh
-
 # Change Command Prompt
 function parse_git_branch {
 git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
