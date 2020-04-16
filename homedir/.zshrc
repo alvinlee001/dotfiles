@@ -77,6 +77,7 @@ unsetopt correct
 # run fortune on new terminal :)
 fortune
 
+plugins=(zsh-autosuggestions)
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
@@ -150,6 +151,7 @@ alias pi='pip3 install --user'
 
 # font sourcing
 source ~/.fonts/*.sh
+# source ~/.fonts/*.sh
 
 # Change Command Prompt
 function parse_git_branch {
@@ -236,6 +238,7 @@ unalias grv
 #
 
 source ./zsh_compose/.zsh_java
+# source ./zsh_compose/.zsh_java
 
 # export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
 #### END ADDITIONAL STUFF
@@ -270,9 +273,6 @@ alias logstash-filebeat='logstash -f /Users/alvinlee/logstash/logstash.filebeat.
 alias ctags="`brew --prefix`/bin/ctags"
 alias py3='python3'
 alias pi='pip3 install --user'
-
-# font sourcing
-source ~/.fonts/*.sh
 
 # Change Command Prompt
 function parse_git_branch {
@@ -368,3 +368,15 @@ export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
 export PYTHONPATH="/Users/alvinlee/Library/Python/3.7/bin"
 #### END ADDITIONAL STUFF
 export PATH="/usr/local/bin:$PATH"
+# using faster powerlevel9k config, for a change of taste, overrrides existing powerlevel9k configs in this current file.
+# comment out to use custom powerlevel9K config
+# source ~/.purepower
+
+
+#### SOME ADDITIONAL STUFF
+#
+
+source ./zsh_compose/.zsh_java
+
+# export PATH="/Users/alvinlee/Library/Python/3.7/bin:$PATH"
+#### END ADDITIONAL STUFF
